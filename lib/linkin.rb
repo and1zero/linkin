@@ -1,0 +1,2 @@
+module Linkin
+end
