@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Web</title>
+    <title>Linkin - URL Shortener</title>
     <%= favicon %>
+
+    <script src="<%= webpack_asset_path('main') %>"></script>
   </head>
   <body>
-    <%= yield %>
+    <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+      <div class="navbar-start">
+        <a class="navbar-item" href="/" title="A generic URL shortener">
+          Linkin
+        </a>
+      </div>
+    </nav>
+
+    <div class="container">
+
+    </div>
   </body>
 </html>

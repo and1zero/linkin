@@ -279,6 +279,22 @@ module Web
     configure :development do
       # Don't handle exceptions, render the stack trace
       handle_exceptions false
+
+      # Enable asset serving from Webpack
+      security.content_security_policy %(
+        script-src 'unsafe-eval' *;
+        connect-src 'self' *;
+        img-src 'self' data: *;
+        style-src 'unsafe-inline' *;
+        font-src 'self' *;
+      )
+
+      assets do
+        compile false
+        cdn true
+        host '0.0.0.0'
+        port 8080
+      end
     end
 
     ##

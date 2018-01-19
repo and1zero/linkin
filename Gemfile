@@ -6,6 +6,9 @@ gem 'hanami-model', '~> 1.1'
 
 gem 'sqlite3'
 
+# Assets Management
+gem 'hanami-webpack', github: 'samuelsimoes/hanami-webpack'
+
 group :development do
   # Code reloading
   # See: http://hanamirb.org/guides/projects/code-reloading
