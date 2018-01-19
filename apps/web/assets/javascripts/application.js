@@ -3,12 +3,11 @@
 // if we have complicated business requirements
 
 const displayError = (message) => {
-  var notification = document.getElementById('notification_placeholder');
-  notification.removeChild();
-  notification.insertAdjacentHTML(
-    'beforeend',
-    `<div class="notification is-danger">${message}</div>`
-  )
+  var helpBlock = document.getElementById('help_block');
+  helpBlock.innerHTML = message;
+  helpBlock.classList.add('is-danger');
+  var inputUrl = document.querySelector('[name="url"]');
+  inputUrl.classList.add('is-danger');
 }
 
 const processForm = function(event) {
@@ -27,13 +26,17 @@ const processForm = function(event) {
     }),
     method: 'POST',
     body: JSON.stringify({ url: '' })
-  }).then(res => res.json()).
+  }).
+    then(res => res.json()).
     then(data => {
       if (data.errors) {
-        throw data.errors;
+        throw new Error(data.errors.url);
       } else {
-        debugger
+        window.reload()
       }
+    }).
+    catch(error => {
+      displayError(error.message);
     });
 }
 

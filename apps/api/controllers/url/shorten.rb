@@ -16,13 +16,6 @@ module Api::Controllers::Url
 
     def call(params)
       if params.valid?
-        self.status = 422
-        self.body = {
-          errors: {
-            url: "Not a valid URL"
-          }
-        }.to_json
-      else
         operation = Api::Operations::Shortening.new(params)
         url = operation.run!
 
@@ -31,6 +24,13 @@ module Api::Controllers::Url
           id: url.id,
           long_url: url.href,
           short_url: "#{request.base_url}/#{Linkin::Url.encode(url.id)}"
+        }.to_json
+      else
+        self.status = 422
+        self.body = {
+          errors: {
+            url: "Not a valid URL"
+          }
         }.to_json
       end
     end
