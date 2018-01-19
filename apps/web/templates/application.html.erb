@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Web</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Linkin</title>
     <%= favicon %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
   </head>
   <body>
+    <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          <%= link_to 'Linkin', routes.root_path, class: 'navbar-item' %>
+        </div>
+      </div>
+    </nav>
     <%= yield %>
+
+    <%= javascript "application" %>
   </body>
 </html>

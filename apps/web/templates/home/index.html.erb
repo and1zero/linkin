@@ -1,0 +1,51 @@
+<section class="section">
+  <div class="container">
+    <h2 class="is-size-2">
+      Shortened URLs
+    </h2>
+
+    <nav class="level">
+      <div class="level-left">
+        <div class="level-item">
+          <form id="shorten_url" class="field has-addons">
+            <div class="control">
+              <input name="url" class="input" type="url" placeholder="Shorten a URL" required>
+            </div>
+            <div class="control">
+              <button type="submit" class="button is-info">
+                Shorten!
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="level-item">
+          <div id="notification_placeholder"></div>
+        </div>
+      </div>
+    </nav>
+
+    <% if urls.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Original URL</th>
+            <th>Shortened URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% urls.each do |url| %>
+            <tr>
+              <td><%= link_to url.href, routes.path(:url, id: url.id) %></td>
+              <td></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <div class="notification is-info">
+        It seems that you don't have any shortened URLs yet.
+      </div>
+    <% end %>
+  </div>
+</section>
