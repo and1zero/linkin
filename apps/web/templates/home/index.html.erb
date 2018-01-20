@@ -22,27 +22,14 @@
       </div>
     </nav>
 
-    <% if urls.any? %>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>
-              Original URL
-            </th>
-            <th>
-              Short URL
-            </th>
-            <th>
-              Created at
-            </th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% urls.each do |url| %>
-            <tr>
-              <td><%= link_to url.href, url.href, { target: '_blank' } %></td>
-              <td>
+    <% if urls.to_a.any? %>
+      <div class="columns">
+        <% urls.each do |url| %>
+          <div class="column">
+            <div class="card">
+              <div class="card-content">
+                <%= link_to url.href, url.href, { target: '_blank' } %>
+                ➡
                 <%=
                   link_to(
                     "#{ENV['BASE_URL']}/#{Linkin::Url.encode(url.id)}",
@@ -50,15 +37,19 @@
                     { target: '_blank' }
                   )
                 %>
-              </td>
-              <td><%= url.created_at %></td>
-              <td>
-                <%= link_to 'View', routes.path(:url, id: url.id) %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+
+                <p class="has-text-grey-light is-size-7">
+                  Created at <%= url.created_at %>
+                </p>
+              </div>
+
+              <div class="card-footer">
+                <%= link_to 'View', routes.path(:url, id: url.id), class: 'card-footer-item' %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
     <% else %>
       <div class="notification is-info">
         It seems that you don't have any shortened URLs yet.

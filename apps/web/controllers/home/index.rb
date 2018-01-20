@@ -5,7 +5,7 @@ module Web::Controllers::Home
     expose :urls
 
     def call(params)
-      @urls = UrlRepository.new.all
+      @urls = UrlRepository.new.recent
     end
   end
 end
