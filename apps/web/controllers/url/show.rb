@@ -2,7 +2,7 @@ module Web::Controllers::Url
   class Show
     include Web::Action
 
-    expose :url, :clicks, :encoded
+    expose :url, :clicks
 
     params do
       required(:id).filled(:int?)
@@ -13,7 +13,6 @@ module Web::Controllers::Url
 
       if @url
         @clicks = click_repository.for_url(url)
-        @encoded = Linkin::Url.encode(url.id)
       else
         self.status = 404
         self.body = "Not found"

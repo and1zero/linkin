@@ -30,27 +30,44 @@
       </dl>
     </div>
 
-    <% if clicks %>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Timestamp</th>
-            <th>IP Address</th>
-            <th>User Agent</th>
-            <th>Referral</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% clicks.each do |click| %>
+    <% unless clicks.to_a.empty? %>
+      <h4 class="is-size-4">
+        Clicks per minute - Last 30 minutes
+      </h4>
+      <section class="section">
+        <div id="error"></div>
+        <canvas id="chart_canvas"></canvas>
+      </section>
+
+      <h4 class="is-size-4">
+        Clicks details
+      </h4>
+      <section class="section">
+        <table class="table">
+          <thead>
             <tr>
-              <td><%= click.created_at %></td>
-              <td><%= click.ip %></td>
-              <td><%= click.user_agent %></td>
-              <td><%= click.referer %></td>
+              <th>Timestamp</th>
+              <th>IP Address</th>
+              <th>User Agent</th>
+              <th>Referral</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <% clicks.each do |click| %>
+              <tr>
+                <td><%= click.created_at %></td>
+                <td><%= click.ip %></td>
+                <td><%= click.user_agent %></td>
+                <td><%= click.referer %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </section>
+
+      <%= javascript 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js', integrity: 'sha256-ABVkpwb9K9PxubvRrHMkk6wmWcIHUE9eBxNZLXYQ84k=' %>
+      <%= javascript 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js', integrity: 'sha256-c0m8xzX5oOBawsnLVpHnU2ieISOvxi584aNElFl2W6M=' %>
+      <%= javascript 'chart' %>
     <% else %>
       <div class="notification is-info">
         It seems that you don't have any visitors yet.
@@ -58,5 +75,3 @@
     <% end %>
   </div>
 </section>
-
-<%= javascript 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js', integrity: 'sha256-c0m8xzX5oOBawsnLVpHnU2ieISOvxi584aNElFl2W6M=' %>

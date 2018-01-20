@@ -9,12 +9,11 @@
   </head>
   <body>
     <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
-      <div class="navbar-menu">
-        <div class="navbar-start">
-          <%= link_to 'Linkin', routes.root_path, class: 'navbar-item' %>
-        </div>
+      <div class="navbar-brand">
+        <%= link_to 'Linkin', routes.root_path, class: 'navbar-item' %>
       </div>
     </nav>
+
     <%= yield %>
 
     <footer class="footer">
