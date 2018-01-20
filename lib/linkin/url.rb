@@ -1,9 +1,7 @@
 module Linkin
   # This is the core of this application
   class Url
-    # Not including '1', 'I', 'l', '0', 'O' because it's redundant
-    # Removing vocal as well to avoid constructing offensive strings
-    ALPHABET = '23456789bcdfghjkmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ-_'.freeze
+    ALPHABET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_'.freeze
     SIZE = ALPHABET.length
 
     # takes number (ID) and convert it into shortened string

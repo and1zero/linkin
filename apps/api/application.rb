@@ -1,4 +1,5 @@
-require "hanami/helpers"
+require 'hanami/helpers'
+require 'hanami/assets'
 
 module Api
   VERSION = '1.0'.freeze
@@ -30,13 +31,6 @@ module Api
 
     configure :test do
       handle_exceptions false
-
-      logger.level :error
-    end
-
-    configure :production do
-      logger.level  :info
-      logger.format :json
     end
   end
 end

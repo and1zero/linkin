@@ -26,15 +26,35 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Original URL</th>
-            <th>Shortened URL</th>
+            <th>
+              Original URL
+            </th>
+            <th>
+              Short URL
+            </th>
+            <th>
+              Created at
+            </th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <% urls.each do |url| %>
             <tr>
-              <td><%= link_to url.href, routes.path(:url, id: url.id) %></td>
-              <td></td>
+              <td><%= link_to url.href, url.href, { target: '_blank' } %></td>
+              <td>
+                <%=
+                  link_to(
+                    routes.url(:short_url, encoded: Linkin::Url.encode(url.id)) ,
+                    routes.path(:short_url, encoded: Linkin::Url.encode(url.id)),
+                    { target: '_blank' }
+                  )
+                %>
+              </td>
+              <td><%= url.created_at %></td>
+              <td>
+                <%= link_to 'View', routes.path(:url, id: url.id) %>
+              </td>
             </tr>
           <% end %>
         </tbody>

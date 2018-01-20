@@ -1,0 +1,60 @@
+<section class="section">
+  <div class="container">
+    <h2 class="is-size-2">
+      Shortened URL
+    </h2>
+
+    <nav class="breadcrumb has-succeeds-separator" aria-label="breadcrumbs">
+      <ul>
+        <li>
+          <%= link_to 'Home', routes.root_path %>
+        </li>
+        <li class="is-active">
+          <a href="#" aria-current="page"><%= url.href %></a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="content">
+      <dl>
+        <dt>Original URL</dt>
+        <dd><%= link_to url.href, url.href, { target: '_blank' } %></dd>
+        <dt>Short URL</dt>
+        <dd>
+          <%= link_to(
+              routes.url(:short_url, encoded: encoded_url) ,
+              routes.path(:short_url, encoded: encoded_url),
+              { target: '_blank' }
+            ) %>
+        </dd>
+      </dl>
+    </div>
+
+    <% if clicks %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>IP Address</th>
+            <th>User Agent</th>
+            <th>Referral</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% clicks.each do |click| %>
+            <tr>
+              <td><%= click.created_at %></td>
+              <td><%= click.ip %></td>
+              <td><%= click.user_agent %></td>
+              <td><%= click.referer %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <div class="notification is-info">
+        It seems that you don't have any visitors yet.
+      </div>
+    <% end %>
+  </div>
+</div>
