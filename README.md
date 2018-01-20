@@ -53,5 +53,7 @@ How to prepare (create and migrate) DB for `development` and `test` environments
 ## ROADMAP
 
 Several improvements can be done to this app.
-[ ] We can add authentication and scope each shortened URLs by user.
-[ ] We can integrate Webpack to this project to have rich experience in frontend development.
+
+- [ ] Write a more scalable query for fetching stats. Currently everything is handled in Javascript, but aggregation and time range filter should happen on the client side.
+- [ ] We can add authentication and scope each shortened URLs by user.
+- [ ] We can integrate Webpack to this project to have rich experience in frontend development.

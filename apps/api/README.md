@@ -70,11 +70,11 @@ Pass the URL ID to receive its details and stats.
 
 * **URL**
 
-/api/urls/:id
+  /api/urls/:id
 
 * **Method:**
 
-`GET`
+  `GET`
 
 * **URL Params**
 
@@ -88,51 +88,51 @@ Pass the URL ID to receive its details and stats.
 
 * **Success Response:**
 
-* **Code:** 200 <br />
-  **Content:** <br />
-  ```javascript
-    {
-      "id": 12,
-      "long_url": "https://google.com",
-      "short_url": "https://linkin-hanami.herokuapp.com/b",
-      "clicks": [
-        {
-          // all timestamps are in UTC
-          "timestamp": "2018-01-20 08:00:30 UTC",
-          // ::1 usually indicates localhost
-          "ip": "219.75.53.61" || "::1",
-          "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) ...",
-          // Referer can be null if the user just type the shortened URL
-          // or open in another tab/window
-          "referer": null || "https://linkin-hanami.herokuapp.com",
-        },
-        // the rest of the click data
-        ...
-      ]
-    }
-  ```
+  * **Code:** 200 <br />
+    **Content:** <br />
+    ```javascript
+      {
+        "id": 12,
+        "long_url": "https://google.com",
+        "short_url": "https://linkin-hanami.herokuapp.com/b",
+        "clicks": [
+          {
+            // all timestamps are in UTC
+            "timestamp": "2018-01-20 08:00:30 UTC",
+            // ::1 usually indicates localhost
+            "ip": "219.75.53.61" || "::1",
+            "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) ...",
+            // Referer can be null if the user just type the shortened URL
+            // or open in another tab/window
+            "referer": null || "https://linkin-hanami.herokuapp.com",
+          },
+          // the rest of the click data
+          ...
+        ]
+      }
+    ```
 
 * **Error Response:**
 
-* **Code:** 404 NOT FOUND <br />
-  **Content:** <br />
-  ```javascript
-    {
-      "errors": "Could not find the URL"
-    }
-  ```
+  * **Code:** 404 NOT FOUND <br />
+    **Content:** <br />
+    ```javascript
+      {
+        "errors": "Could not find the URL"
+      }
+    ```
 
 * **Sample Call:**
 
-```javascript
-  fetch('/api/urls/1', {
-    headers: new Headers({
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    }),
-    method: 'GET',
-  }).then(res => res.json()).
-    then(data => {
-      // your code here
-    });
-```
+  ```javascript
+    fetch('/api/urls/1', {
+      headers: new Headers({
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }),
+      method: 'GET',
+    }).then(res => res.json()).
+      then(data => {
+        // your code here
+      });
+  ```
