@@ -24,6 +24,12 @@ Please visit README.md inside `apps/api` to see the documentation for API.
 
 ## Project Setup
 
+Assuming that user already have Ruby and PostgreSQL, we can simply install the application by:
+
+```
+% bundle install
+```
+
 How to run tests:
 
 ```
@@ -39,7 +45,7 @@ How to run the development console:
 How to run the development server:
 
 ```
-% bundle exec hanami server
+% bundle exec hanami server --port 4555
 ```
 
 How to prepare (create and migrate) DB for `development` and `test` environments:
@@ -48,6 +54,33 @@ How to prepare (create and migrate) DB for `development` and `test` environments
 % bundle exec hanami db prepare
 
 % HANAMI_ENV=test bundle exec hanami db prepare
+```
+
+## Using Docker and Docker-compose
+
+If you have Docker and Docker compose installed, it is possible to install the entire project without having to install Ruby and PostgreSQL.
+
+Simply build the containers:
+
+```
+% docker-compose build
+```
+
+And run it:
+
+```
+% docker-compose run
+```
+
+And presto, it should be up and running in http://localhost:4555
+
+### Caveat
+
+The first time we are installing and building these containers, e will see an error in the browser: `Sequel::DatabaseError: PG::UndefinedTable` because the database setup hasn't been done.
+In order to do that, we need to execute `db prepare` command inside the web container.
+
+```
+% docker exec <web_container_id> bundle exec hanami db prepare
 ```
 
 ## ROADMAP
