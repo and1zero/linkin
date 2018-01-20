@@ -3,7 +3,8 @@ var error = document.getElementById('error');
 
 // Get the data from our API
 const fetchData = function() {
-  return fetch(`//${window.location.host}/api${window.location.pathname}`).
+  const url = '//' + window.location.host + '/api' + window.location.pathname;
+  return fetch(url).
     then(function(res) { return res.json(); }).
     then(function(data) {
       if (data.clicks) {
