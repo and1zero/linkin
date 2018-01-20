@@ -1,6 +1,7 @@
 require 'features_helper'
 
 describe 'Show a shortened URL' do
+  let(:shortener) { Linkin::Url }
   let(:click_repository) { ClickRepository.new }
   let(:repository) { UrlRepository.new }
   let(:url) { repository.create(href: 'https://placekitten.com') }
@@ -27,6 +28,9 @@ describe 'Show a shortened URL' do
 
     # ensure URL details are stored
     assert page.has_content?('https://placekitten.com')
+
+    # ensure shortened URL is displayed
+    assert page.has_content?("#{ENV['BASE_URL']}/my/#{shortener.encode(url.id)}")
 
     # ensure chart is present
     assert page.has_css?('#chart_canvas')

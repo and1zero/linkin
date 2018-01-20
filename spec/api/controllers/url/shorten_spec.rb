@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Api::Controllers::Url::Shorten do
+  let(:shortener) { Linkin::Url }
   let(:action) { Api::Controllers::Url::Shorten.new }
   let(:repository) { UrlRepository.new }
 
@@ -33,8 +34,16 @@ describe Api::Controllers::Url::Shorten do
 
     it 'should create the shortened URL' do
       status, headers, body = action.call(params)
+      parsed_body = JSON.parse(body[0])
 
       status.must_equal 201
+
+      # id must be returned
+      id = parsed_body['id']
+
+      # check if the generated URL is correct
+      parsed_body['long_url'].must_equal 'https://placekitten.com'
+      parsed_body['short_url'].must_equal "#{ENV['BASE_URL']}/my/#{shortener.encode(id)}"
     end
   end
 end

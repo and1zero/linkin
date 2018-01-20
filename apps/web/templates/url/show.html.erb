@@ -22,7 +22,7 @@
         <dt>Short URL</dt>
         <dd>
           <%= link_to(
-              "#{ENV['BASE_URL']}/#{encoded_id}",
+              "#{ENV['BASE_URL']}/my/#{encoded_id}",
               routes.path(:short_url, encoded: encoded_id),
               { target: '_blank' }
             ) %>

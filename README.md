@@ -9,7 +9,19 @@ The initial business requirements are:
 
 ## Demo
 
-This project is deployed in heroku: https://hanami-linkin.herokuapp.com/
+This project is deployed in 📦 [Heroku](https://www.heroku.com/): https://hanami-linkin.herokuapp.com/
+
+### Disclaimer
+
+The entire project actually defeats the purpose of shortening URL, because the generated URLs can be longer than the URL that we want to shorten. 😂
+
+Example:
+
+If we shorten `https://google.com` (18 chars), it will become `https://hanami-linkin.herokuapp.com/my/b` (~40 chars, the last encoded letter is random, depending on the primary key of the URL).
+
+Also we are using the namespace `my` to shorten the URL. The purpose of this is to avoid situation where the generated encoded letters are similar to our routes, e.g. `urls`.
+
+Of course, in the real world, we would have used different domain, preferable much shorter and we can use a custom WebMatcher.
 
 ## Dependencies
 
@@ -74,6 +86,22 @@ And run it:
 
 And presto, it should be up and running in http://localhost:4555
 
+### Running hanami commands in docker
+
+Simply append `docker exec <web_container_id>` before running any command
+
+Migrating in docker:
+
+```
+% docker exec <web_container_id> hanami db migrate
+```
+
+Running tests in docker:
+
+```
+% docker exec <web_container_id> bundle exec rake
+```
+
 ### Caveat
 
 The first time we are installing and building these containers, e will see an error in the browser: `Sequel::DatabaseError: PG::UndefinedTable` because the database setup hasn't been done.
@@ -90,3 +118,4 @@ Several improvements can be done to this app.
 - [ ] Write a more scalable query for fetching stats. Currently everything is handled in Javascript, but aggregation and time range filter should happen on the client side.
 - [ ] We can add authentication and scope each shortened URLs by user.
 - [ ] We can integrate Webpack to this project to have rich experience in frontend development.
+- [ ] We can integrate a worker to convert request IP address and user agent to more useful informations, most likely the geo location data and OS/browser information.
