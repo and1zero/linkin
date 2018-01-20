@@ -75,7 +75,7 @@ const fetchData = function() {
     }).
     catch(function(error) {
       console.error(error);
-      error.innerHTML = '<div class="notification is-error">' + error + '</div>';
+      error.innerHTML = '<div class="notification is-error">' + error + '<\/div>';
     });
 };
 
