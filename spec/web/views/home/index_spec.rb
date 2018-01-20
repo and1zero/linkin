@@ -1,15 +1,13 @@
 require_relative '../../../spec_helper'
 
 describe Web::Views::Home::Index do
-  let(:exposures) { Hash[foo: 'bar'] }
+  let(:url) { Url.new(href: 'https://placekitten.com') }
+  let(:exposures) { Hash[urls: [url]] }
   let(:template)  { Hanami::View::Template.new('apps/web/templates/home/index.html.erb') }
   let(:view)      { Web::Views::Home::Index.new(template, exposures) }
   let(:rendered)  { view.render }
 
-  it 'exposes #foo' do
-    skip 'This is an auto-generated test. Edit it and add your own tests.'
-
-    # Example
-    view.foo.must_equal exposures.fetch(:foo)
+  it 'exposes #urls' do
+    view.urls.must_equal exposures.fetch(:urls)
   end
 end

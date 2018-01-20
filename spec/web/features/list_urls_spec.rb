@@ -14,7 +14,7 @@ describe 'List shortened URLs' do
   it 'displays each shortened URLs' do
     visit '/'
 
-    within '.table' do
+    within '.columns' do
       assert page.has_content?('https://google.com')
       assert page.has_content?('https://placekitten.com')
     end
