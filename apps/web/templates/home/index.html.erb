@@ -45,7 +45,7 @@
               <td>
                 <%=
                   link_to(
-                    routes.url(:short_url, encoded: Linkin::Url.encode(url.id)) ,
+                    "#{ENV['BASE_URL']}/#{Linkin::Url.encode(url.id)}",
                     routes.path(:short_url, encoded: Linkin::Url.encode(url.id)),
                     { target: '_blank' }
                   )

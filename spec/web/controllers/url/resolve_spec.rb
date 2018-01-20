@@ -3,10 +3,12 @@ require 'spec_helper'
 describe Web::Controllers::Url::Resolve do
   let(:action) { Web::Controllers::Url::Resolve.new }
   let(:shortener) { Linkin::Url }
+  let(:click_repository) { ClickRepository.new }
   let(:repository) { UrlRepository.new }
   let(:url) { repository.create(href: 'https://google.com') }
 
   before do
+    click_repository.clear
     repository.clear
   end
 

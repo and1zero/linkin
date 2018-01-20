@@ -22,8 +22,8 @@
         <dt>Short URL</dt>
         <dd>
           <%= link_to(
-              routes.url(:short_url, encoded: encoded_url) ,
-              routes.path(:short_url, encoded: encoded_url),
+              "#{ENV['BASE_URL']}/#{encoded_id}",
+              routes.path(:short_url, encoded: encoded_id),
               { target: '_blank' }
             ) %>
         </dd>

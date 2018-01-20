@@ -28,7 +28,7 @@ module Api::Controllers::Url
         self.body = {
           id: url.id,
           long_url: url.href,
-          short_url: "#{request.base_url}/#{Linkin::Url.encode(url.id)}",
+          short_url: "#{ENV['BASE_URL']}/#{Linkin::Url.encode(url.id)}",
           clicks: clicks,
         }.to_json
       else

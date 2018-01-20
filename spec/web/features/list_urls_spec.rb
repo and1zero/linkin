@@ -1,8 +1,10 @@
 require 'features_helper'
 
 describe 'List shortened URLs' do
+  let(:click_repository) { ClickRepository.new }
   let(:repository) { UrlRepository.new }
   before do
+    click_repository.clear
     repository.clear
 
     repository.create(href: 'https://google.com')

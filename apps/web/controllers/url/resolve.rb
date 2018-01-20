@@ -37,9 +37,9 @@ module Web::Controllers::Url
 
       # this is most likely the most important stats we can record
       # we can get user's location from IP
-      ip = request.ip
+      ip = request.ip || '0.0.0.0'
       # we can extract browser and operating system from user agent
-      user_agent = request.user_agent
+      user_agent = request.user_agent || 'minitest'
       # we can check if the click's origin
       # maybe in the future we can skip counting any clicks from blacklisted domains
       referer = request.referer
