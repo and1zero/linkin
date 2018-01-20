@@ -29,11 +29,11 @@
   * **Code:** 201 <br />
     **Content:** <br />
     ```javascript
-      {
-        "id": 12,
-        "long_url": "https://google.com",
-        "short_url": "https://linkin-hanami.herokuapp.com/my/b"
-      }
+    {
+      "id": 12,
+      "long_url": "https://google.com",
+      "short_url": "https://hanami-linkin.herokuapp.com/my/b"
+    }
     ```
 
 * **Error Response:**
@@ -41,27 +41,35 @@
   * **Code:** 422 UNPROCESSABLE ENTRY <br />
     **Content:** <br />
     ```javascript
-      {
-        "errors": {
-          "url": "Not a valid URL"
-        }
+    {
+      "errors": {
+        "url": "Not a valid URL"
       }
+    }
     ```
 
 * **Sample Call:**
 
   ```javascript
-    fetch('/api/shorten', {
-      headers: new Headers({
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      }),
-      method: 'POST',
-      body: JSON.stringify({ url: url })
-    }).then(res => res.json()).
-      then(data => {
-        // your code here
-      });
+  fetch('https://hanami-linkin.herokuapp.com/api/shorten', {
+    headers: new Headers({
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    }),
+    method: 'POST',
+    body: JSON.stringify({ url: 'https://google.com' })
+  }).then(res => res.json()).
+    then(data => {
+      // your code here
+    });
+  ```
+
+  ```bash
+  % curl -X POST \
+      https://hanami-linkin.herokuapp.com/api/shorten \
+      -H 'cache-control: no-cache' \
+      -H 'content-type: application/json' \
+      -d '{ "url": "https://google.com" }'
   ```
 
 **Get a URL stats (and details)**
@@ -91,25 +99,25 @@ Pass the URL ID to receive its details and stats.
   * **Code:** 200 <br />
     **Content:** <br />
     ```javascript
-      {
-        "id": 12,
-        "long_url": "https://google.com",
-        "short_url": "https://linkin-hanami.herokuapp.com/my/b",
-        "clicks": [
-          {
-            // all timestamps are in UTC
-            "timestamp": "2018-01-20 08:00:30 UTC",
-            // ::1 usually indicates localhost
-            "ip": "219.75.53.61" || "::1",
-            "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) ...",
-            // Referer can be null if the user just type the shortened URL
-            // or open in another tab/window
-            "referer": null || "https://linkin-hanami.herokuapp.com",
-          },
-          // the rest of the click data
-          ...
-        ]
-      }
+    {
+      "id": 12,
+      "long_url": "https://google.com",
+      "short_url": "https://hanami-linkin.herokuapp.com/my/b",
+      "clicks": [
+        {
+          // all timestamps are in UTC
+          "timestamp": "2018-01-20 08:00:30 UTC",
+          // ::1 usually indicates localhost
+          "ip": "219.75.53.61" || "::1",
+          "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) ...",
+          // Referer can be null if the user just type the shortened URL
+          // or open in another tab/window
+          "referer": null || "https://hanami-linkin.herokuapp.com",
+        },
+        // the rest of the click data
+        ...
+      ]
+    }
     ```
 
 * **Error Response:**
@@ -117,22 +125,26 @@ Pass the URL ID to receive its details and stats.
   * **Code:** 404 NOT FOUND <br />
     **Content:** <br />
     ```javascript
-      {
-        "errors": "Could not find the URL"
-      }
+    {
+      "errors": "Could not find the URL"
+    }
     ```
 
 * **Sample Call:**
 
   ```javascript
-    fetch('/api/urls/1', {
-      headers: new Headers({
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      }),
-      method: 'GET',
-    }).then(res => res.json()).
-      then(data => {
-        // your code here
-      });
+  fetch('/api/urls/1', {
+    headers: new Headers({
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    }),
+    method: 'GET',
+  }).then(res => res.json()).
+    then(data => {
+      // your code here
+    });
+  ```
+
+  ```bash
+  % curl -X GET https://hanami-linkin.herokuapp.com/api/urls/1
   ```
