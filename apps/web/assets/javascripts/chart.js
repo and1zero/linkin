@@ -3,8 +3,8 @@ var error = document.getElementById('error');
 
 // Get the data from our API
 fetch(`//${window.location.host}/api${window.location.pathname}`).
-  then(res => res.json()).
-  then(data => {
+  then(function(res) { return res.json(); }).
+  then(function(data) {
     if (data.clicks) {
       // let's render the chart
       let clickData = [];
@@ -12,7 +12,7 @@ fetch(`//${window.location.host}/api${window.location.pathname}`).
       // We need to populate the data for the last 30 minutes
       // for demo purposes - minute aggregation is too granular,
       // but we don't want to wait for hours for the graph to render
-      const clicks = data.clicks.map(click => {
+      const clicks = data.clicks.map(function(click) {
         return moment(click.timestamp);
       });
       let timestamp = moment().add(1, 'm');
@@ -21,7 +21,7 @@ fetch(`//${window.location.host}/api${window.location.pathname}`).
         count = 0;
         timestamp = timestamp.clone().subtract(1, 'm');
         // check if there is any clicks in this timestamp
-        clicks.forEach(click => {
+        clicks.forEach(function(click) {
           if (click.isSame(timestamp, 'minute')) {
             count += 1;
           }
@@ -72,7 +72,7 @@ fetch(`//${window.location.host}/api${window.location.pathname}`).
       throw 'No clicks data found';
     }
   }).
-  catch(error => {
+  catch(function(error) {
     console.error(error);
     error.innerHTML = `<div class="notification is-error">${error}</div>`;
   });
