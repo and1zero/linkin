@@ -7,13 +7,19 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: ''
       POSTGRES_DB: linkin_development
+    ports:
+      - 5432:5432
 
   web:
     build:
       context: .
       args:
         environment: development
+    env_file:
+      - .env.development
     command: hanami server
+    volumes:
+      - .:/app
     ports:
       - 4555:2300
     depends_on:
