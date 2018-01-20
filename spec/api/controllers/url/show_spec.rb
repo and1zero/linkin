@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Api::Controllers::Url::Show do
+  let(:shortener) { Linkin::Url }
   let(:action) { Api::Controllers::Url::Show.new }
   let(:click_repository) { ClickRepository.new }
   let(:repository) { UrlRepository.new }
@@ -40,7 +41,13 @@ describe Api::Controllers::Url::Show do
 
       status.must_equal 200
       parsed_body['long_url'].must_equal 'http://placekitten.com'
+      parsed_body['short_url'].must_equal "#{ENV['BASE_URL']}/my/#{shortener.encode(url.id)}"
+
+      # check the stats
+      parsed_body['clicks'].length.must_equal 1
       parsed_body['clicks'][0]['ip'].must_equal 'testing'
+      parsed_body['clicks'][0]['user_agent'].must_equal 'Minitest'
+      parsed_body['clicks'][0]['Referer'].must_equal nil
     end
   end
 end

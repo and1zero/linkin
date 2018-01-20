@@ -88,6 +88,9 @@ And presto, it should be up and running in http://localhost:4555
 
 ### Running hanami commands in docker
 
+Note: The web container instance must be up and running (from docker-compose).
+If you cloned this repository under `linkin` folder, `<web_container_id>` can be aliased to `linkin_web_1`.
+
 Simply append `docker exec <web_container_id>` before running any command
 
 Migrating in docker:

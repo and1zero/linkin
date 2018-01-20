@@ -21,8 +21,12 @@ describe Api::Controllers::Url::Shorten do
 
       it 'should throw error message' do
         status, headers, body = action.call(params)
+        parsed_body = JSON.parse(body[0])
 
         status.must_equal 422
+
+        # check for the error message
+        parsed_body['errors']['url'].must_equal 'Not a valid URL'
       end
     end
   end

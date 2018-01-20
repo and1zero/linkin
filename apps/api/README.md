@@ -32,7 +32,7 @@
       {
         "id": 12,
         "long_url": "https://google.com",
-        "short_url": "https://linkin-hanami.herokuapp.com/b"
+        "short_url": "https://linkin-hanami.herokuapp.com/my/b"
       }
     ```
 
@@ -94,7 +94,7 @@ Pass the URL ID to receive its details and stats.
       {
         "id": 12,
         "long_url": "https://google.com",
-        "short_url": "https://linkin-hanami.herokuapp.com/b",
+        "short_url": "https://linkin-hanami.herokuapp.com/my/b",
         "clicks": [
           {
             // all timestamps are in UTC
