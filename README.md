@@ -118,7 +118,7 @@ In order to do that, we need to execute `db prepare` command inside the web cont
 
 Several improvements can be done to this app.
 
-- [ ] Write more scalable query for fetching stats. Currently everything is handled in Javascript, but aggregation and time range filter should happen on the client side.
+- [ ] Write more scalable query for fetching stats. Currently everything is handled in Javascript, but aggregation and time range filter should happen on server side.
 - [ ] We can add authentication and scope each shortened URLs by user.
 - [ ] We can integrate Webpack to this project to have rich experience in frontend development.
 - [ ] We can integrate a worker to convert request IP address and user agent to more useful informations, most likely the geo location data and OS/browser information.
