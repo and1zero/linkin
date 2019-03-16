@@ -1,5 +1,7 @@
 # Linkin
 
+[![Build Status](https://travis-ci.org/and1zero/linkin.svg?branch=master)](https://travis-ci.org/and1zero/linkin)
+
 A generic URL shortener project.
 
 The initial business requirements are:

@@ -2,4 +2,8 @@ language: ruby
 rvm: 2.5.3
 services:
   - postgresql
-script: bundle exec rake test
+env:
+  - HANAMI_ENV=test
+script:
+  - bundle exec hanami db prepare
+  - bundle exec rake test
