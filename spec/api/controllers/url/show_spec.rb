@@ -47,7 +47,7 @@ describe Api::Controllers::Url::Show do
       parsed_body['clicks'].length.must_equal 1
       parsed_body['clicks'][0]['ip'].must_equal 'testing'
       parsed_body['clicks'][0]['user_agent'].must_equal 'Minitest'
-      parsed_body['clicks'][0]['Referer'].must_equal nil
+      assert_nil parsed_body['clicks'][0]['Referer']
     end
   end
 end

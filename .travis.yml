@@ -3,10 +3,15 @@ rvm: 2.5.3
 cache:
   bundler: true
   directories:
-    - /home/travis/.rvm/
+  - "/home/travis/.rvm/"
 services:
-  - postgresql
+- postgresql
 script:
-  - HANAMI_ENV=test bundle exec hanami db create
-  - HANAMI_ENV=test bundle exec hanami db migrate
-  - bundle exec rake test
+- HANAMI_ENV=test bundle exec hanami db create
+- HANAMI_ENV=test bundle exec hanami db migrate
+- bundle exec rake test
+deploy:
+  provider: heroku
+  api_key:
+    secure: vSjlQD/p74gbfdeHFCIPVzR5huY8OhMyy5DtaL3zGoi2fyb0+87bdg1ZVMUXOlNZBTDKxyHdkFoB9jdT7oibYzahvjchdCHDmN/nbaWqp4d2wlwJea44T3od/lsl6BAcjqAvpwQW4T38qyq1IkYqnAt6jkAIGqsfwH16aHo8yZyoRG/HmVxLh5sMXGWdxap6RYzEG68HhEZh4JlZNW9vAn5lUH1iP6DbdlyoFYgFh9RlOpTj9I8W35GVENADWQIg+ATp0NqaxplDtwaI15zmYJWZ23IwbJG6fSOpPVhYrqFzzp5zXyfa4MPowN2DxpsUX2jXATX5B2aRDZ+jDkUjhUZ8/iz0gaPNZPnLsFYPd+5UBpdeJ59qk4M5F7LEfhLdOiyNp1R29CIjEUYQ/XESfBAFI89M28/KID6oyFBoACiPOoUOtY5Uxgaf9/W76KKaKaUmDfG+ktqjOcCzLYjtoxcYvBXFmVGyeAQ67nUQSBt2gdPxpnFzu3V3dh7LIv3zTaSlVwpBuS4Y4QvDxvoSUd6L08m4kpU6t0s+FD/o3keuNHqjGhTjQsg3zQeCztSnvzQJ9ITIpTBhMRh581/x1QjMro+inoWkql+vZGCvyf1InujKzb54757543sorl5dQkqURvqUqZbJhtlFHMCPGH9Akdpv08Avn/0/5SeI8yA=
+  app: hanami-linkin
