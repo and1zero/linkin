@@ -1,9 +1,12 @@
 language: ruby
 rvm: 2.5.3
+cache:
+  bundler: true
+  directories:
+    - /home/travis/.rvm/
 services:
   - postgresql
-env:
-  - HANAMI_ENV=test
 script:
-  - bundle exec hanami db prepare
+  - HANAMI_ENV=test bundle exec hanami db create
+  - HANAMI_ENV=test bundle exec hanami db migrate
   - bundle exec rake test
