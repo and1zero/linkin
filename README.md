@@ -83,7 +83,13 @@ Simply build the containers:
 And run it:
 
 ```
-% docker-compose run
+% docker-compose up -d
+```
+
+Create the database and apply migration:
+
+```
+% docker exec <web_container_id> hanami db prepare
 ```
 
 And presto, it should be up and running in http://localhost:4555

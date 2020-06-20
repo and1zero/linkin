@@ -1,4 +1,4 @@
-FROM ruby:2.5.3
+FROM ruby:2.6.6
 
 # install libraries
 RUN apt-get update && \
@@ -20,6 +20,9 @@ COPY . $APP_HOME
 ARG environment=production
 ENV HANAMI_ENV $environment
 ENV HANAMI_HOST=0.0.0.0
+
+# install Bundle 2
+RUN gem install bundler:2.1.4
 
 # throw errors if Gemfile has been modified since Gemfile.lock
 RUN bundle config --global frozen 1
