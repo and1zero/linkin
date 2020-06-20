@@ -23,4 +23,4 @@ group :test do
   gem 'capybara'
 end
 
-ruby '2.5.3'
+ruby '2.7.0'
