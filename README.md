@@ -1,6 +1,6 @@
 # Linkin
 
-[![Build Status](https://travis-ci.org/and1zero/linkin.svg?branch=master)](https://travis-ci.org/and1zero/linkin)
+[![Build Status](https://travis-ci.com/and1zero/linkin.svg?branch=master)](https://travis-ci.com/and1zero/linkin)
 
 A generic URL shortener project.
 
