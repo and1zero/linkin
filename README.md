@@ -1,6 +1,6 @@
 # Linkin
 
-[![Build Status](https://travis-ci.org/and1zero/linkin.svg?branch=master)](https://travis-ci.org/and1zero/linkin)
+[![Build Status](https://travis-ci.com/and1zero/linkin.svg?branch=master)](https://travis-ci.com/and1zero/linkin)
 
 A generic URL shortener project.
 
@@ -83,7 +83,13 @@ Simply build the containers:
 And run it:
 
 ```
-% docker-compose run
+% docker-compose up -d
+```
+
+Create the database and apply migration:
+
+```
+% docker exec <web_container_id> hanami db prepare
 ```
 
 And presto, it should be up and running in http://localhost:4555

@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'rake'
-gem 'hanami',       '~> 1.1'
-gem 'hanami-model', '~> 1.1'
+gem 'rake', '~> 13.0.1'
+gem 'hanami',       '~> 1.3'
+gem 'hanami-model', '~> 1.3'
 # prefer puma over webrick
-gem 'puma'
+gem 'puma', '~> 4.3.5'
 # database
 gem 'pg'
 
@@ -23,4 +23,4 @@ group :test do
   gem 'capybara'
 end
 
-ruby '2.5.3'
+ruby '2.6.6'
