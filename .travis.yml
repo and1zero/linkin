@@ -6,6 +6,8 @@ cache:
   - "/home/travis/.rvm/"
 services:
 - postgresql
+before_install:
+- gem install bundler
 script:
 - HANAMI_ENV=test bundle exec hanami db create
 - HANAMI_ENV=test bundle exec hanami db migrate
