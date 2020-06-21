@@ -28,9 +28,11 @@ Of course, in the real world, we would have used different domain, preferable mu
 ## Dependencies
 
 This project is built on Hanami.
-* 💎 [Ruby](https://www.ruby-lang.org/en/) 2.4.2
-* 🌸 [Hanami](http://hanamirb.org/) 1.1.0
+* 💎 [Ruby](https://www.ruby-lang.org/en/)
+* 🌸 [Hanami](http://hanamirb.org/)
 * 🐘 [PostgreSQL](https://www.postgresql.org/)
+
+Alternatively, we can use 🐋 `docker` and 🐳 `docker-compose`.
 
 ## API Documentation
 
