@@ -4,7 +4,7 @@ gem 'rake', '~> 13.0.1'
 gem 'hanami',       '~> 1.3'
 gem 'hanami-model', '~> 1.3'
 # prefer puma over webrick
-gem 'puma', '~> 4.3.5'
+gem 'puma', '~> 4.3.11'
 # database
 gem 'pg'
 
