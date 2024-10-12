@@ -20,6 +20,7 @@ class LinksController < ApplicationController
 
   def show
     @link = Link.find(params[:id])
+    @clicks = @link.clicks
   end
 
   def edit
@@ -50,7 +51,10 @@ class LinksController < ApplicationController
       original_url = nil
     end
     respond_to do |format|
-      format.html { redirect_to original_url, allow_other_host: true }
+      format.html do
+        record_click(@link)
+        redirect_to original_url, allow_other_host: true
+      end
     end
   end
 
@@ -58,5 +62,15 @@ class LinksController < ApplicationController
 
   def link_params
     params.require(:link).permit(:original_url)
+  end
+
+  def record_click(link)
+    click = link.clicks.new(
+      ip_address: request.remote_ip,
+      user_agent: request.user_agent,
+      referer: request.referer,
+      clicked_at: Time.current
+    )
+    click.save
   end
 end
