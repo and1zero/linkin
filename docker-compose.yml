@@ -1,29 +1,12 @@
 version: '3.1'
 services:
-  db:
-    image: postgres:10
-    restart: always
-    environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: ''
-      POSTGRES_DB: linkin_development
-      POSTGRES_HOST_AUTH_METHOD: trust
-    ports:
-      - 5432:5432
-
-  web:
+  app:
     build:
       context: .
       args:
         environment: development
-    env_file:
-      - .env.development
-    command: hanami server
+    command: bash -c "rails db migrate && rails server"
     volumes:
       - .:/app
     ports:
-      - 4555:2300
-    depends_on:
-      - db
-    links:
-      - db
+      - 3000:3000

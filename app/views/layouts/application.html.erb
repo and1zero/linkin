@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= content_for(:title) || "Linkin" %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "turbo", type: "module" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <%= link_to 'Linkin', root_path, class: 'navbar-item' %>
+      </div>
+    </nav>
+
+    <%= notice %>
+    <%= alert %>
+
+    <%= yield %>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="content">
+          <p>
+            🛤️ Built on <a href="https://guides.rubyonrails.org/" target="_blank">Rails</a>
+          </p>
+          <p>
+            ☕️ Source code available <a href="https://github.com/and1zero/linkin" target="_blank">here</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

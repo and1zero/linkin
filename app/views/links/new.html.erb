@@ -1,0 +1,15 @@
+<section class="section">
+  <div class="container">
+    <nav class="breadcrumb has-succeeds-separator" aria-label="breadcrumbs">
+      <ul>
+        <li>
+          <%= link_to "Home", root_path %>
+        </li>
+        <li class="is-active">
+          <a href="#" aria-current="page">New Shortened Link</a>
+        </li>
+      </ul>
+    </nav>
+    <%= render "form", link: @link %>
+  </div>
+</section>

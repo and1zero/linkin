@@ -1,34 +1,69 @@
-FROM ruby:2.6.6
+# syntax = docker/dockerfile:1
 
-# install libraries
-RUN apt-get update && \
-    apt-get install -y build-essential libpq-dev postgresql-client cron \
-    --fix-missing --no-install-recommends && \
-    rm -rf /var/lib/apt/lists/*
+# This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
+# docker build -t my-app .
+# docker run -d -p 80:80 -p 443:443 --name my-app -e RAILS_MASTER_KEY=<value from config/master.key> my-app
 
-ENV APP_HOME /app
+# Make sure RUBY_VERSION matches the Ruby version in .ruby-version
+ARG RUBY_VERSION=3.3.5
+FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
-RUN mkdir -p $APP_HOME
+# Rails app lives here
+WORKDIR /rails
 
-WORKDIR $APP_HOME
+# Install base packages
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y curl libjemalloc2 libvips sqlite3 && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-# install Bundle 2
-RUN gem install bundler:2.1.4
+# Set production environment
+ENV RAILS_ENV="production" \
+    BUNDLE_DEPLOYMENT="1" \
+    BUNDLE_PATH="/usr/local/bundle" \
+    BUNDLE_WITHOUT="development"
 
-COPY Gemfile $APP_HOME/
-COPY Gemfile.lock $APP_HOME/
+# Throw-away build stage to reduce size of final image
+FROM base AS build
 
-# throw errors if Gemfile has been modified since Gemfile.lock
-RUN bundle config --global frozen 1
+# Install packages needed to build gems
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y build-essential git pkg-config && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-RUN bundle install
+# Install application gems
+COPY Gemfile Gemfile.lock ./
+RUN bundle install && \
+    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
+    bundle exec bootsnap precompile --gemfile
 
-COPY . $APP_HOME
+# Copy application code
+COPY . .
 
-# this is the default environment if no build-arg is passed
-ARG environment=production
-ENV HANAMI_ENV $environment
-ENV HANAMI_HOST=0.0.0.0
+# Precompile bootsnap code for faster boot times
+RUN bundle exec bootsnap precompile app/ lib/
 
-EXPOSE 2300
-CMD ["hanami server"]
+# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+
+
+
+
+# Final stage for app image
+FROM base
+
+# Copy built artifacts: gems, application
+COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
+COPY --from=build /rails /rails
+
+# Run and own only the runtime files as a non-root user for security
+RUN groupadd --system --gid 1000 rails && \
+    useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
+    chown -R rails:rails db log storage tmp
+USER 1000:1000
+
+# Entrypoint prepares the database.
+ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+
+# Start the server by default, this can be overwritten at runtime
+EXPOSE 3000
+CMD ["./bin/rails", "server"]

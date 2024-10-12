@@ -1,0 +1,17 @@
+<%= form_with model: link, local: true do |form| %>
+      <div class="field">
+        <%= form.label :original_url, class: "label" %>
+        <div class="control">
+          <%= form.text_field :original_url, class: "input #{'is-danger' if link.errors[:original_url].any?}", placeholder: "URL" %>
+          <% link.errors.full_messages_for(:original_url).each do |message| %>
+            <p class="help is-danger"><%= message %></p>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="field is-grouped">
+        <div class="control">
+          <%= form.submit "Shorten", class: "button is-link" %>
+        </div>
+      </div>
+    <% end %>
