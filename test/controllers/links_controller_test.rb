@@ -41,5 +41,8 @@ class LinksControllerTest < ActionDispatch::IntegrationTest
   test "should be able to redirect from short_url" do
     get "/my/#{@link.short_url}"
     assert_redirected_to @link.original_url
+    @link.reload
+    # link should have click events
+    assert @link.clicks
   end
 end

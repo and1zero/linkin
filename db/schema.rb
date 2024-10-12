@@ -10,11 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_12_020747) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_12_073039) do
+  create_table "clicks", force: :cascade do |t|
+    t.integer "link_id", null: false
+    t.string "ip_address"
+    t.string "user_agent"
+    t.string "referer"
+    t.datetime "clicked_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["link_id"], name: "index_clicks_on_link_id"
+  end
+
   create_table "links", force: :cascade do |t|
     t.string "original_url"
     t.string "short_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "clicks", "links"
 end
